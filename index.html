@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Motivation - Mayra</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(to bottom, #a2d9ff, #fffacd);
+      height: 100vh;
+      overflow: hidden;
+      color: #333;
+      position: relative;
+    }
+
+    /* Parallax background with floating words */
+    .parallax-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .parallax-word {
+      position: absolute;
+      font-size: 1.2rem;
+      opacity: 0.6;
+      animation: float 25s linear infinite;
+      font-weight: 600;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.8;
+      }
+      90% {
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .word-kz {
+      color: #2c3e50;
+    }
+
+    .word-en {
+      color: #8b0000;
+    }
+
+    /* Main container */
+    #container {
+      position: relative;
+      z-index: 10;
+      width: 90%;
+      max-width: 900px;
+      height: 90vh;
+      background-color: rgba(255, 255, 255, 0.92);
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      margin: 2vh auto;
+      backdrop-filter: blur(10px);
+    }
+
+    /* Logo area */
+    #logo-area {
+      text-align: center;
+      padding: 30px 20px;
+      background: linear-gradient(135deg, #FFD700, #FF6B6B);
+      color: white;
+      border-bottom: 3px solid #FFD700;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #logo-icon {
+      font-size: 4rem;
+      margin: 10px;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+    }
+
+    #logo-text {
+      font-size: 2.5rem;
+      font-weight: bold;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      letter-spacing: -1px;
+    }
+
+    #slogan {
+      font-size: 1.3rem;
+      margin-top: 10px;
+      opacity: 0.9;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+    }
+
+    /* Chat area */
+    #chat-area {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      background-color: #f9f9f9;
+      scroll-behavior: smooth;
+    }
+
+    .message {
+      max-width: 80%;
+      padding: 15px 20px;
+      margin: 12px 0;
+      border-radius: 18px;
+      line-height: 1.6;
+      font-size: 1.15rem;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .user-message {
+      align-self: flex-end;
+      background-color: #4169e1;
+      color: white;
+      border-bottom-right-radius: 5px;
+    }
+
+    .mayra-message {
+      align-self: flex-start;
+      background-color: #e6f7ff;
+      color: #1a1a1a;
+      border-bottom-left-radius: 5px;
+    }
+
+    .bilingual-message {
+      border-left: 4px solid #4169e1;
+      padding-left: 15px;
+      margin-top: 8px;
+      font-style: italic;
+      font-size: 0.95rem;
+      color: #555;
+    }
+
+    /* Input area */
+    #input-area {
+      display: flex;
+      padding: 15px;
+      background-color: rgba(255, 255, 255, 0.9);
+      border-top: 1px solid #ddd;
+      position: relative;
+    }
+
+    #user-input {
+      flex: 1;
+      padding: 14px;
+      border: 2px solid #4169e1;
+      border-radius: 25px;
+      outline: none;
+      font-size: 1rem;
+      transition: border-color 0.3s;
+    }
+
+    #user-input:focus {
+      border-color: #1e3c72;
+    }
+
+    #send-btn {
+      margin-left: 10px;
+      padding: 12px 25px;
+      background-color: #4169e1;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: bold;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    #send-btn:hover {
+      background-color: #1e3c72;
+      transform: translateY(-2px);
+    }
+
+    #send-btn:active {
+      transform: translateY(1px);
+    }
+
+    /* Responsive design */
+    @media (max-width: 600px) {
+      #container {
+        width: 95%;
+        height: 95vh;
+        margin: 1vh auto;
+      }
+      #logo-text { font-size: 2rem; }
+      #logo-icon { font-size: 3rem; }
+      .message { max-width: 90%; font-size: 1rem; }
+      .bilingual-message { font-size: 0.9rem; }
+      #input-area { padding: 10px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Parallax background with floating words -->
+  <div class="parallax-layer" id="parallax-layer"></div>
+
+  <div id="container">
+    <div id="logo-area">
+      <div id="logo-icon">💡🚀</div>
+      <div id="logo-text">Motivation</div>
+      <div id="slogan">«Мотивация – дамудың бастауы!»</div>
+    </div>
+
+    <div id="chat-area">
+      <div class="message mayra-message">
+        Достар, сәлем! 👋<br><br>
+        Менің атым — Майра.<br><br>
+        Мен сендерге “Мотивацияның адам дамуына әсері” тақырыбы бойынша көмектесемін.<br><br>
+        💡 Мотивация – бұл адамның жетістікке жету жолындағы қозғаушы күші.
+      </div>
+    </div>
+
+    <div id="input-area">
+      <input type="text" id="user-input" placeholder="Сұрағыңызды жазыңыз..." onkeypress="handleKeyPress(event)">
+      <button id="send-btn" onclick="sendQuestion()">Жіберу</button>
+    </div>
+  </div>
+
+  <script>
+    // Parallax words data
+    const kazakhWords = [
+      "Мотивация", "Даму", "Мақсат", "Жетістік", "Зейін", "Табандылық", 
+      "Өзін-өзі басқару", "Қуаныш", "Сенім", "Шығармашылық", "Табыс", "Бағыт",
+      "Табандылық", "Күш", "Қозғаушы", "Ішкі", "Сыртқы", "Қанағат", "Мағына"
+    ];
+
+    const englishWords = [
+      "Motivation", "Growth", "Goal", "Achievement", "Focus", "Persistence",
+      "Self-regulation", "Joy", "Confidence", "Creativity", "Success", "Direction",
+      "Resilience", "Power", "Driving", "Intrinsic", "Extrinsic", "Satisfaction", "Purpose"
+    ];
+
+    // Create parallax layer with floating words
+    const parallaxLayer = document.getElementById("parallax-layer");
+    
+    function createParallaxWords() {
+      for (let i = 0; i < 25; i++) {
+        const word = document.createElement("div");
+        word.className = "parallax-word";
+        
+        // Randomly choose Kazakh or English
+        if (Math.random() > 0.5) {
+          word.textContent = kazakhWords[Math.floor(Math.random() * kazakhWords.length)];
+          word.classList.add("word-kz");
+        } else {
+          word.textContent = englishWords[Math.floor(Math.random() * englishWords.length)];
+          word.classList.add("word-en");
+        }
+        
+        // Random positioning and animation
+        word.style.left = `${Math.random() * 100}%`;
+        word.style.animationDuration = `${15 + Math.random() * 20}s`;
+        word.style.animationDelay = `${Math.random() * 5}s`;
+        word.style.fontSize = `${0.8 + Math.random() * 1.2}rem`;
+        word.style.opacity = `${0.4 + Math.random() * 0.5}`;
+        
+        parallaxLayer.appendChild(word);
+      }
+    }
+
+    // Full knowledge base from user's provided data (50 Q&A pairs)
+    const knowledgeBase = [
+      {
+        q: ["мотивация деген не", "дегеніміз не", "definition of motivation", "motivation is"],
+        kz: "Мотивация – бұл адамның белгілі бір мақсатқа жету үшін әрекет етуге итермелейтін ішкі және сыртқы күштердің жиынтығы.",
+        en: "Motivation is the combination of internal and external forces that drive a person to take action toward achieving a specific goal."
+      },
+      {
+        q: ["бұл жобаның негізгі мақсаты", "project main goal", "main objective"],
+        kz: "Жобаның мақсаты – мотивацияның адам дамуына әсерін, әсіресе мақсат қою мен оған жетудегі рөлін зерттеу.",
+        en: "The main goal of the project is to explore the influence of motivation on human development, particularly its role in goal setting and achievement."
+      },
+      {
+        q: ["жобаның өзектілігі", "relevance of the project"],
+        kz: "Жоба жетінші сынып оқушыларының өзін-өзі дамыту, мақсат қою және өсу қабілетін арттыруға бағытталған.",
+        en: "The relevance lies in helping seventh-grade students develop goal-setting skills, self-control, and a growth mindset."
+      },
+      {
+        q: ["зерттеу объектісі", "research object"],
+        kz: "Адамдардың мақсат қою және оған жету әдістері зерттеледі.",
+        en: "The object of study is the methods people use to set and achieve goals."
+      },
+      {
+        q: ["зерттеу пәні", "subject of research"],
+        kz: "Зерттеу пәні – мотивацияның адам дамуы мен мінез-құлқына әсері.",
+        en: "The subject of study is the function of motivation in human development and behavior."
+      },
+      {
+        q: ["гипотеза", "hypothesis"],
+        kz: "Мотивациясы жоғары адамдар табанды, төзімді және табыстырақ болады.",
+        en: "The hypothesis assumes that highly motivated individuals are more persistent, resilient, and successful."
+      },
+      {
+        q: ["мақсат қою неліктен маңызды", "why is goal setting important"],
+        kz: "Мақсат қою адамға бағыт, мағына және даму жолын көрсетеді.",
+        en: "Goal setting provides direction, meaning, and a pathway for personal growth."
+      },
+      {
+        q: ["мотивация мен мақсаттың байланысы", "connection between motivation and goal"],
+        kz: "Мотивация мақсат қоюды және оған жету процесін қозғаушы күш ретінде басқарады.",
+        en: "Motivation acts as the driving force behind goal setting and achievement."
+      },
+      {
+        q: ["мотивация адамды қалай жетістікке жетелейді", "how motivation leads to success"],
+        kz: "Ол адамды әрекет етуге, табандылық танытуға және қиындықтарды жеңуге ынталандырады.",
+        en: "It encourages individuals to act, persist, and overcome challenges."
+      },
+      {
+        q: ["мақсат қою кезінде неге айқындық маңызды", "why clarity in goal setting"],
+        kz: "Айқын мақсат адамға нақты бағыт береді және күшін тиімді жұмсауға көмектеседі.",
+        en: "Clear goals help people focus their efforts and use resources effectively."
+      },
+      {
+        q: ["ішкі мотивация", "intrinsic motivation"],
+        kz: "Бұл адамның қызығушылығы мен қанағаттану сезімінен туындайтын ынта.",
+        en: "Intrinsic motivation comes from inner interests and satisfaction."
+      },
+      {
+        q: ["сыртқы мотивация", "extrinsic motivation"],
+        kz: "Бұл марапат, баға немесе мақтау сияқты сыртқы факторлардан туындайтын ынта.",
+        en: "Extrinsic motivation arises from external rewards like praise, grades, or recognition."
+      },
+      {
+        q: ["мотивация интеллектуалды дамуға қалай әсер етеді", "how motivation affects intellectual growth"],
+        kz: "Ол зейінді шоғырландырып, оқу мен танымдық белсенділікті арттырады.",
+        en: "Motivation enhances focus and increases learning and cognitive activity."
+      },
+      {
+        q: ["мотивация есте сақтауға қалай көмектеседі", "motivation and memory"],
+        kz: "Мотивация мидың белсенділігін арттырып, ақпаратты жақсырақ есте сақтауға жағдай жасайды.",
+        en: "It improves brain activity and facilitates better memory retention."
+      },
+      {
+        q: ["мотивация шығармашылыққа әсер ете ме", "motivation and creativity"],
+        kz: "Иә, ол адамның жаңа идеяларды іздеуіне және ойлау қабілетін кеңейтуіне ықпал етеді.",
+        en: "Yes, motivation stimulates creativity and broadens thinking capacity."
+      },
+      {
+        q: ["мотивациясы жоғары адам қандай қасиеттерге ие", "qualities of motivated person"],
+        kz: "Табандылық, жауапкершілік, өзін-өзі басқару және сенімділік қасиеттері дамиды.",
+        en: "Highly motivated people develop persistence, responsibility, self-regulation, and confidence."
+      },
+      {
+        q: ["мотивация психологиялық әл-ауқатқа қалай әсер етеді", "motivation and psychological well-being"],
+        kz: "Мотивация жетістік пен өз-өзіне сенімділік сезімін арттырады.",
+        en: "Motivation strengthens a sense of accomplishment and self-confidence."
+      },
+      {
+        q: ["мотивацияның болмауы неге әкеледі", "lack of motivation"],
+        kz: "Мақсатсыздық, апатия және қызығушылықтың төмендеуіне.",
+        en: "Lack of motivation can lead to aimlessness, apathy, and reduced interest."
+      },
+      {
+        q: ["мотивация мен өзін-өзі бағалау арасында қандай байланыс", "motivation and self-esteem"],
+        kz: "Жетістікке жеткен сайын өзін-өзі бағалау жоғарылайды.",
+        en: "As people achieve goals, their self-esteem naturally increases."
+      },
+      {
+        q: ["психологиялық тұрғыдан мотивация не береді", "psychological benefits of motivation"],
+        kz: "Ол ішкі қанағат, қуаныш және өмірлік мағына сезімін береді.",
+        en: "Psychologically, motivation provides inner satisfaction, joy, and a sense of purpose."
+      },
+      {
+        q: ["мотивация әлеуметтік дамуға қалай ықпал етеді", "motivation and social development"],
+        kz: "Ол қарым-қатынас орнатуға және топта жұмыс істеуге итермелейді.",
+        en: "Motivation encourages communication and teamwork."
+      },
+      {
+        q: ["мотивация достық пен қолдау сезімін арттыра ма", "motivation and friendship"],
+        kz: "Иә, ол адамдарды біріктіріп, өзара түсіністікті күшейтеді.",
+        en: "Yes, motivation strengthens friendships and mutual understanding."
+      },
+      {
+        q: ["әлеуметтік мотивация", "social motivation"],
+        kz: "Бұл қоғамда өзін таныту, құрметке ие болу ниеті.",
+        en: "Social motivation is the desire for recognition and belonging within society."
+      },
+      {
+        q: ["командалық жұмыста мотивация неліктен маңызды", "motivation in teamwork"],
+        kz: "Мотивация ынтымақтастық пен жауапкершілікті арттырады.",
+        en: "In teamwork, motivation promotes collaboration and responsibility."
+      },
+      {
+        q: ["мотивация адамның мінез-құлқына қалай әсер етеді", "motivation and behavior"],
+        kz: "Ол тәртіпті, жауапкершілікті және мақсаттылықты қалыптастырады.",
+        en: "Motivation shapes discipline, responsibility, and purposefulness."
+      },
+      {
+        q: ["оқуда мотивацияның рөлі", "role of motivation in learning"],
+        kz: "Ол оқу процесіне қызығушылық пен белсенділік әкеледі.",
+        en: "In learning, motivation increases engagement and enthusiasm."
+      },
+      {
+        q: ["мотивация оқушылардың жетістігіне әсер ете ме", "motivation and academic achievement"],
+        kz: "Иә, ол оқу үлгерімін едәуір жақсартады.",
+        en: "Yes, motivation significantly improves academic performance."
+      },
+      {
+        q: ["мақсатқа жету кезінде қандай кедергілер кездеседі", "obstacles to achieving goals"],
+        kz: "Уақыт тапшылығы, сенімсіздік, жалқаулық және қорқыныш.",
+        en: "Common obstacles include lack of time, doubt, laziness, and fear."
+      },
+      {
+        q: ["бұл кедергілерді қалай жеңуге болады", "how to overcome obstacles"],
+        kz: "Жоспар құру, өзін ынталандыру және табандылық арқылы.",
+        en: "They can be overcome through planning, self-encouragement, and perseverance."
+      },
+      {
+        q: ["ішкі мотивацияны қалай арттыруға болады", "how to increase intrinsic motivation"],
+        kz: "Қызығушылық тудыратын іс-әрекеттермен айналысу арқылы.",
+        en: "Intrinsic motivation can be boosted by engaging in interesting activities."
+      },
+      {
+        q: ["мотивация тұлғаның өзін-өзі дамытуына қалай әсер етеді", "motivation and self-development"],
+        kz: "Ол жаңа қабілеттер мен қасиеттердің дамуына ықпал етеді.",
+        en: "Motivation promotes the development of new skills and personal growth."
+      },
+      {
+        q: ["сауалнама не үшін жүргізілді", "why survey was conducted"],
+        kz: "Адамдардың мотивация туралы көзқарасын анықтау үшін.",
+        en: "The survey was conducted to understand people’s perceptions of motivation."
+      },
+      {
+        q: ["сауалнамаға қанша адам қатысты", "how many people participated in survey"],
+        kz: "30 қатысушы, олардың барлығы Қазақстаннан.",
+        en: "Thirty participants from Kazakhstan took part in the survey."
+      },
+      {
+        q: ["қатысушылардың басым бөлігі не деп ойлайды", "what majority of participants think"],
+        kz: "25 адам мотивацияның қоғамға оң әсері бар деп санайды.",
+        en: "Twenty-five participants believe motivation has a positive impact on society."
+      },
+      {
+        q: ["бұл нәтиже нені көрсетеді", "what this result shows"],
+        kz: "Мотивация адамдарды қоғамға пайдалы әрекетке итермелейді.",
+        en: "This result shows that motivation drives people toward socially beneficial actions."
+      },
+      {
+        q: ["мотивацияның қоғамдағы рөлі", "role of motivation in society"],
+        kz: "Ол адамдарды біріктіреді және әлеуметтік белсенділікті арттырады.",
+        en: "Motivation unites people and increases social engagement."
+      },
+      {
+        q: ["мотивациясы жоғары адам қоғамға қалай әсер етеді", "impact of motivated person on society"],
+        kz: "Ол басқаларды шабыттандырып, үлгі болады.",
+        en: "Highly motivated individuals inspire others and set positive examples."
+      },
+      {
+        q: ["мотивация мен ерік күшінің байланысы", "motivation and willpower"],
+        kz: "Мотивация ерік күшін арттырады және табандылықты күшейтеді.",
+        en: "Motivation strengthens willpower and persistence."
+      },
+      {
+        q: ["мақсатқа жетудің негізгі кезеңдері", "stages of achieving goals"],
+        kz: "Мақсат қою, жоспарлау, әрекет ету және нәтижені талдау.",
+        en: "The main stages are goal setting, planning, action, and evaluation."
+      },
+      {
+        q: ["мотивация адамның өмірлік ұстанымына әсер ете ме", "motivation and life philosophy"],
+        kz: "Иә, ол позитивті көзқарас пен белсенді өмір салтын қалыптастырады.",
+        en: "Yes, motivation shapes a positive outlook and active lifestyle."
+      },
+      {
+        q: ["мотивация және эмоция арасында байланыс бар ма", "motivation and emotion"],
+        kz: "Иә, мотивация эмоцияны реттеп, қуаныш сезімін тудырады.",
+        en: "Yes, motivation regulates emotions and evokes joy."
+      },
+      {
+        q: ["мотивацияның негізгі түрлері", "types of motivation"],
+        kz: "Ішкі, сыртқы, әлеуметтік және кәсіби мотивация.",
+        en: "Main types include intrinsic, extrinsic, social, and professional motivation."
+      },
+      {
+        q: ["мотивация адамның өзін-өзі бақылауына қалай әсер етеді", "motivation and self-control"],
+        kz: "Ол өзін-өзі реттеу мен жауапкершілікті арттырады.",
+        en: "Motivation enhances self-control and accountability."
+      },
+      {
+        q: ["мотивацияның нәтижесін қалай өлшеуге болады", "how to measure motivation"],
+        kz: "Жеткен мақсаттар мен адамның даму деңгейі арқылы.",
+        en: "It can be measured by achieved goals and the person’s level of growth."
+      },
+      {
+        q: ["зерттеу нәтижесінің маңызы неде", "significance of research results"],
+        kz: "Ол мотивацияның адам дамуының барлық саласына әсер ететінін дәлелдейді.",
+        en: "The results prove that motivation influences all aspects of human development."
+      },
+      {
+        q: ["мотивация адам өмірін қалай өзгертеді", "how motivation changes life"],
+        kz: "Ол адамға мағына, бағыт және жетістік сезімін береді.",
+        en: "Motivation gives people meaning, direction, and a sense of achievement."
+      },
+      {
+        q: ["мотивацияның білім саласында маңызы", "importance in education"],
+        kz: "Ол оқушылардың қызығушылығын арттырып, оқу сапасын жақсартады.",
+        en: "In education, motivation increases student engagement and improves learning outcomes."
+      },
+      {
+        q: ["бұл зерттеу нәтижелерін қайда қолдануға болады", "application of research results"],
+        kz: "Мектептерде, психология сабақтарында және жеке даму бағдарламаларында.",
+        en: "These findings can be applied in schools, psychology lessons, and self-development programs."
+      },
+      {
+        q: ["қорытынды қандай", "what is the conclusion"],
+        kz: "Мотивация – адамның жан-жақты дамуының негізгі факторы.",
+        en: "The conclusion is that motivation is the key factor in overall human development."
+      },
+      {
+        q: ["мотивацияны өмірде қалай сақтау керек", "how to maintain motivation"],
+        kz: "Өз мақсаттарыңды нақты белгілеп, әр жетістік үшін өзіңді мадақтау қажет.",
+        en: "To maintain motivation, set clear goals and celebrate every achievement."
+      }
+    ];
+
+    function addMessage(text, sender) {
+      const chatArea = document.getElementById("chat-area");
+      const messageDiv = document.createElement("div");
+      messageDiv.className = `message ${sender}-message`;
+      messageDiv.innerHTML = text.replace(/\n/g, "<br>");
+      chatArea.appendChild(messageDiv);
+      chatArea.scrollTop = chatArea.scrollHeight;
+    }
+
+    function addBilingualMessage(kzText, enText) {
+      const chatArea = document.getElementById("chat-area");
+      const messageDiv = document.createElement("div");
+      messageDiv.className = "message mayra-message";
+      messageDiv.innerHTML = kzText.replace(/\n/g, "<br>") + 
+        `<div class="bilingual-message">${enText}</div>`;
+      chatArea.appendChild(messageDiv);
+      chatArea.scrollTop = chatArea.scrollHeight;
+    }
+
+    function playTypingSound() {
+      const audio = new Audio("https://assets.mixkit.co/sfx/preview/mixkit-typewriter-sonar-effect-753.mp3");
+      audio.volume = 0.2;
+      audio.play().catch(e => {});
+    }
+
+    function findAnswer(userQuestion) {
+      const lowerQuestion = userQuestion.toLowerCase().trim();
+      
+      // Try exact matches first
+      for (const item of knowledgeBase) {
+        for (const query of item.q) {
+          if (lowerQuestion.includes(query.toLowerCase()) || query.toLowerCase().includes(lowerQuestion)) {
+            return { kz: item.kz, en: item.en };
+          }
+        }
+      }
+      
+      // Fallback: check if question is a number (1 to 50)
+      const num = parseInt(lowerQuestion);
+      if (!isNaN(num) && num >= 1 && num <= knowledgeBase.length) {
+        const item = knowledgeBase[num - 1];
+        return { kz: item.kz, en: item.en };
+      }
+      
+      // If no match found
+      const lang = navigator.language || 'kk';
+      if (lang.startsWith('kk') || lang.startsWith('ru')) {
+        return { 
+          kz: "Мен сіздің сұрағыңызға толық жауап бере алмадым. Нақты сұрақ қойып көріңіз немесе 1-ден 50-ге дейінгі нөмірді енгізіңіз.", 
+          en: "I couldn't fully answer your question. Please ask more specifically or enter a number from 1 to 50." 
+        };
+      } else {
+        return { 
+          kz: "Мен сіздің сұрағыңызға толық жауап бере алмадым. Нақты сұрақ қойып көріңіз немесе 1-ден 50-ге дейінгі нөмірді енгізіңіз.", 
+          en: "I couldn't fully answer your question. Please ask more specifically or enter a number from 1 to 50." 
+        };
+      }
+    }
+
+    function sendQuestion() {
+      const input = document.getElementById("user-input");
+      const question = input.value.trim();
+      
+      if (question === "") return;
+      
+      addMessage(question, "user");
+      input.value = "";
+      
+      setTimeout(() => {
+        const answer = findAnswer(question);
+        addBilingualMessage(answer.kz, answer.en);
+        playTypingSound();
+      }, 800);
+    }
+
+    function handleKeyPress(event) {
+      if (event.key === "Enter") {
+        sendQuestion();
+      }
+    }
+
+    // Initialize on load
+    window.onload = function() {
+      createParallaxWords();
+    };
+  </script>
+</body>
+</html>
+
